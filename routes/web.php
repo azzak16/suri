@@ -27,11 +27,14 @@ Route::get('/inventaris/create', [InventarisController::class, 'create'])->name(
 Route::post('/inventaris', [InventarisController::class, 'store'])->name('inventaris.store');
 
 Route::get('/', [LokasiController::class, 'index'])->name('lokasi.index');
+Route::post('/lokasi', [LokasiController::class, 'store'])->name('lokasi.store');
 Route::get('/lokasi/select', [LokasiController::class, 'select'])->name('lokasi.select');
 
 Route::get('/aset', [AsetController::class, 'index'])->name('aset.index');
+Route::post('/aset', [AsetController::class, 'store'])->name('aset.store');
 Route::get('/aset/select', [AsetController::class, 'select'])->name('aset.select');
 
 Route::get('/satuan', [SatuanController::class, 'index'])->name('satuan.index');
+Route::post('/satuan', [SatuanController::class, 'store'])->name('satuan.store');
 Route::get('/satuan/select', [SatuanController::class, 'select'])->name('satuan.select');
 

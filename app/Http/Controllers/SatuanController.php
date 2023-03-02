@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Satuan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SatuanController extends Controller
 {
@@ -27,5 +28,29 @@ class SatuanController extends Controller
             'items'         => $data,
             'total_count'   => $data->count()
         ]);
+    }
+
+    public function store(Request $request)
+    {
+        // dd($request->all());
+        DB::beginTransaction();
+        $trans = Satuan::create([
+            "name" => $request->name
+        ]);
+
+        if (!$trans) {
+            DB::rollback();
+            return response()->json([
+                'status' => false,
+                'message'     => $trans
+            ], 400);
+        }
+
+        DB::commit();
+        return response()->json([
+            'status'     => true,
+            'message'   => 'mantap',
+            'url'     => route('satuan.index'),
+        ], 200);
     }
 }
